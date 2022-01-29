@@ -1,5 +1,6 @@
 package me.arunav.mutiny
 
+import io.smallrye.mutiny.Multi
 import io.smallrye.mutiny.Uni
 
 /**
@@ -8,13 +9,22 @@ import io.smallrye.mutiny.Uni
  *  If you don’t the computation won’t even start.
  */
 
-fun helloMutiny() {
+fun helloUniMutiny() {
     Uni.createFrom().item("Hello")
         .onItem().transform { "$it Mutiny" }
         .onItem().transform { it.uppercase() }
         .subscribe().with { println(">> $it") }
 }
 
+fun creatingMultis() {
+    Multi.createFrom().items(1, 2, 3, 4, 5, 6)
+        .onItem().transform { it * 2 }
+        .select().first(3)
+        .onFailure().recoverWithItem(0)
+        .subscribe().with { println(it) }
+}
+
 fun main() {
-    helloMutiny()
+    helloUniMutiny()
+    creatingMultis()
 }
