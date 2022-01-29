@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="me.arunav.ReactiveGreetingResourceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-01-28T22:40:53" hostname="mac-2.local" time="1.403">
+  <properties/>
+  <testcase name="testHelloEndpoint()" classname="me.arunav.ReactiveGreetingResourceTest" time="1.403"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Jan 28, 2022 3:40:52 PM org.jboss.threads.Version <clinit>
+INFO: JBoss Threads version 3.4.2.Final
+Jan 28, 2022 3:40:53 PM org.jboss.threads.Version <clinit>
+INFO: JBoss Threads version 3.4.2.Final
+Jan 28, 2022 3:40:53 PM io.quarkus.bootstrap.runner.Timing printStartupTime
+INFO: Quarkus 2.6.3.Final on JVM started in 1.970s. Listening on: http://localhost:8081
+Jan 28, 2022 3:40:53 PM io.quarkus.bootstrap.runner.Timing printStartupTime
+INFO: Profile test activated. 
+Jan 28, 2022 3:40:53 PM io.quarkus.bootstrap.runner.Timing printStartupTime
+INFO: Installed features: [cdi, kotlin, resteasy-reactive, smallrye-context-propagation, vertx]
+]]></system-err>
+</testsuite>

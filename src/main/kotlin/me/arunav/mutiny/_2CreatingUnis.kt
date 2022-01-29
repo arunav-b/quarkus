@@ -37,7 +37,7 @@ fun creatingFailingUnis() {
 /**
  * Create empty Unis
  */
-fun creatingNullUni() {
+fun creatingEmptyUni() {
     val nullItem = Uni.createFrom().nullItem<Int>()
 }
 
