@@ -96,3 +96,45 @@
       .ticks().every(Duration.ofMillis(100))
   
   ```
+
+### Events
+
+- `Uni` and `Multi` emit events. Your code is going to observe and process these events. Most of the time, your code is
+  only interested in item and failure events. But there are other kinds of events such as cancellation, request,
+  completion, and so on:
+
+  ![events](./.images/events.png "events")
+
+- For each kind of event, there is an associated group providing the methods to handle that specific event: `onItem()`
+  , `onFailure()`, `onCompletion()` and so on.
+
+- These groups provide two methods to **peek** at the various events without impacting its distribution: `invoke(…)`
+  and `call(…)`. **It does not transform the received event; it notifies you that something happened and let you react.
+  Once this _reaction_ completes, the event is propagated downstream or upstream depending on the direction of the
+  event.**
+
+#### The `invoke` method
+
+- The `invoke` method is synchronous and the passed callback does not return anything. Mutiny invokes the configured
+  callback when the observed stream dispatches the event and propagates the event downstream when the callback returns.
+  It blocks the dispatching.
+
+  ![invoke](./.images/invoke.png "invoke")
+
+  > The invoke method does not change the event, except in one case. If the callback throws an exception, the downstream does not get the actual event but get a failure event instead.
+
+#### The `call` method
+
+- Unlike `invoke`, `call` is asynchronous, and the callback returns a `Uni<?>` object. `call` is often used when you
+  need to implement asynchronous side-effects, such as closing resources.
+
+- Mutiny does not dispatch the original event downstream until the Uni returned by the callback emits an item.
+
+  ![call](./.images/call.png "call")
+
+  > - Under the hood, Mutiny gets the `Uni` (by invoking the callback) and subscribes to it. It observes the item or failure event from that Uni. It discards the item value as only the emission matters in this case.
+  > - If the callback throws an exception or the produced `Uni` produces a failure, Mutiny propagates that failure (or a `CompositeException`) downstream, replacing the original event.
+
+#### Difference between `invoke` and `call`
+
+  ![diff](./.images/diff.png "diff")

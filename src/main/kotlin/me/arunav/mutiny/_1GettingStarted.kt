@@ -9,14 +9,14 @@ import io.smallrye.mutiny.Uni
  *  If you don’t the computation won’t even start.
  */
 
-fun helloUniMutiny() {
+fun creatingUni() {
     Uni.createFrom().item("Hello")
         .onItem().transform { "$it Mutiny" }
         .onItem().transform { it.uppercase() }
         .subscribe().with { println(">> $it") }
 }
 
-fun creatingMultis() {
+fun creatingMulti() {
     Multi.createFrom().items(1, 2, 3, 4, 5, 6)
         .onItem().transform { it * 2 }
         .select().first(3)
@@ -25,6 +25,6 @@ fun creatingMultis() {
 }
 
 fun main() {
-    helloUniMutiny()
-    creatingMultis()
+    creatingUni()
+    creatingMulti()
 }
