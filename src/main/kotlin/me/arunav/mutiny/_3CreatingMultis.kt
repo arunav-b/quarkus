@@ -6,7 +6,7 @@ import java.time.Duration
 import java.util.stream.IntStream
 
 // Create a Multi from a list of Ints
-val multi = Multi.createFrom().items(1, 2, 3, 4)
+val multi: Multi<Int> = Multi.createFrom().items(1, 2, 3, 4, 5, 6, 7, 8)
 
 // Subscribing to a Multi
 val cancellable: Cancellable =
@@ -19,16 +19,16 @@ val cancellable: Cancellable =
         )
 
 // Creating Multi from an Intstream
-val items1 = Multi.createFrom()
+val items1: Multi<Int> = Multi.createFrom()
     .items { IntStream.range(1, 10).boxed() }
 
 // Creating Multi from a collection
-val items2 = Multi.createFrom()
+val items2: Multi<Int> = Multi.createFrom()
     .iterable(listOf(1, 2, 3, 4, 5, 6))
 
 // Creating failing Multis
-val exception = Multi.createFrom().failure<Int>(Exception("Some Exception"))
-val exception2 = Multi.createFrom().failure<Int> { Exception("Another Exception") }
+val exception: Multi<Int> = Multi.createFrom().failure<Int>(Exception("Some Exception"))
+val exception2: Multi<Int> = Multi.createFrom().failure<Int> { Exception("Another Exception") }
 
 // Creating empty Multis
 val empty = Multi.createFrom().empty<Int>()
